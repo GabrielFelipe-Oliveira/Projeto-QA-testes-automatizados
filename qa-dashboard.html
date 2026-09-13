@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard QA — Loja de Confecção</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="min-h-screen flex flex-col font-sans text-black bg-white">
+
+    <!-- Cabeçalho (Header) padrão -->
+    <header class="w-full border-b border-black flex items-center justify-between px-8 py-5">
+        <div class="text-3xl font-medium tracking-wide"> 
+            Loja 
+        </div>
+        
+        <nav class="hidden md:flex space-x-10 items-center font-medium">
+            <a href="/produtos" class="hover:text-gray-600 transition">Página</a>
+            <a href="/qa-dashboard.html" class="hover:text-gray-600 transition">Dashboard</a>
+            <a href="/qa-report.html" class="hover:text-gray-600 transition">Report</a>
+        </nav>
+        
+        <!-- BOTÃO FUNCIONAL: Adicionar Produto -->
+        <a href="/produtos" class="bg-black text-white px-5 py-2 rounded font-medium hover:bg-gray-800 transition text-sm">
+            Home
+        </a>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main class="flex-grow flex flex-col items-center py-12 px-6 w-full max-w-[1000px] mx-auto">
+        
+        <!-- Título da Página -->
+        <div class="w-full border-b border-gray-200 pb-6 mb-10 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="text-center md:text-left">
+                <h1 class="text-3xl font-bold mb-2">Dashboard de Automação de Testes</h1>
+                <p class="text-gray-500 text-sm">Loja de Confecção &middot; análise da última execução do QA</p>
+            </div>
+            <div class="bg-blue-50 text-blue-700 border border-blue-200 px-4 py-2 rounded-full font-bold text-xs whitespace-nowrap">
+                Execução concluída &middot; 3,958 s
+            </div>
+        </div>
+
+        <!-- KPIs -->
+        <section class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 w-full mb-12">
+            <div class="border border-gray-300 p-6 rounded flex flex-col justify-center text-center bg-gray-50">
+                <span class="text-xs text-gray-500 font-bold uppercase tracking-wider mb-2">Testes executados</span>
+                <span class="text-4xl font-black text-black">28</span>
+                <span class="text-[10px] text-gray-400 mt-2">100% da suíte registrada</span>
+            </div>
+            <div class="border border-gray-300 p-6 rounded flex flex-col justify-center text-center bg-green-50">
+                <span class="text-xs text-gray-500 font-bold uppercase tracking-wider mb-2">Aprovados</span>
+                <span class="text-4xl font-black text-green-600">24</span>
+                <span class="text-[10px] text-gray-400 mt-2">85,7% dos testes</span>
+            </div>
+            <div class="border border-gray-300 p-6 rounded flex flex-col justify-center text-center bg-red-50">
+                <span class="text-xs text-gray-500 font-bold uppercase tracking-wider mb-2">Falhos</span>
+                <span class="text-4xl font-black text-red-600">4</span>
+                <span class="text-[10px] text-gray-400 mt-2">14,3% dos testes</span>
+            </div>
+            <div class="border border-gray-300 p-6 rounded flex flex-col justify-center text-center bg-gray-50">
+                <span class="text-xs text-gray-500 font-bold uppercase tracking-wider mb-2">Taxa de sucesso</span>
+                <span class="text-4xl font-black text-black">85,7%</span>
+                <span class="text-[10px] text-gray-400 mt-2">Meta recomendada: 95%+</span>
+            </div>
+        </section>
+
+        <!-- Detalhes por Categoria -->
+        <section class="w-full mb-12 flex flex-col md:flex-row gap-6">
+            
+            <!-- Resultado Geral -->
+            <div class="flex-1 border border-gray-300 p-8 rounded bg-white">
+                <h2 class="text-lg font-bold mb-6 border-b border-gray-100 pb-2">Resultado geral</h2>
+                <div class="flex flex-col items-center justify-center">
+                    <div class="text-5xl font-black text-black mb-1">85,7%</div>
+                    <div class="text-sm text-gray-500 mb-6">aprovados</div>
+                    
+                    <div class="w-full flex justify-between text-sm mb-3">
+                        <span class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-green-600"></span> Aprovados</span>
+                        <span class="font-bold">24</span>
+                    </div>
+                    <div class="w-full flex justify-between text-sm mb-3">
+                        <span class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-red-600"></span> Falhos</span>
+                        <span class="font-bold">4</span>
+                    </div>
+                    <div class="w-full flex justify-between text-sm pt-3 border-t border-gray-100">
+                        <span class="text-gray-500">Status Geral</span>
+                        <span class="font-bold text-red-600">Atenção</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Barras de Categoria -->
+            <div class="flex-1 border border-gray-300 p-8 rounded bg-white">
+                <h2 class="text-lg font-bold mb-6 border-b border-gray-100 pb-2">Testes por categoria</h2>
+                
+                <div class="space-y-5">
+                    <div class="flex items-center gap-4 text-sm">
+                        <span class="w-12 font-bold text-gray-600">APP</span>
+                        <div class="flex-grow h-3 bg-gray-200 rounded-full overflow-hidden">
+                            <div class="h-full bg-black rounded-full" style="width: 100%"></div>
+                        </div>
+                        <span class="w-10 text-right font-bold">2/2</span>
+                    </div>
+                    <div class="flex items-center gap-4 text-sm">
+                        <span class="w-12 font-bold text-gray-600">UI</span>
+                        <div class="flex-grow h-3 bg-gray-200 rounded-full overflow-hidden">
+                            <div class="h-full bg-black rounded-full" style="width: 100%"></div>
+                        </div>
+                        <span class="w-10 text-right font-bold">2/2</span>
+                    </div>
+                    <div class="flex items-center gap-4 text-sm">
+                        <span class="w-12 font-bold text-gray-600">BD</span>
+                        <div class="flex-grow h-3 bg-gray-200 rounded-full overflow-hidden">
+                            <div class="h-full bg-black rounded-full" style="width: 100%"></div>
+                        </div>
+                        <span class="w-10 text-right font-bold">3/3</span>
+                    </div>
+                    <div class="flex items-center gap-4 text-sm">
+                        <span class="w-12 font-bold text-gray-600">Func.</span>
+                        <div class="flex-grow h-3 bg-gray-200 rounded-full overflow-hidden">
+                            <div class="h-full bg-black rounded-full" style="width: 81%"></div>
+                        </div>
+                        <span class="w-10 text-right font-bold">17/21</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tabela de Falhas -->
+        <section class="w-full mb-12">
+            <h2 class="text-xl font-bold mb-4 border-l-4 border-red-600 pl-3">Falhas identificadas</h2>
+            <div class="w-full overflow-x-auto">
+                <table class="w-full border-collapse border border-gray-300 text-left">
+                    <thead class="bg-gray-100">
+                        <tr>
+                            <th class="border border-gray-300 px-6 py-3 font-bold text-gray-700">ID</th>
+                            <th class="border border-gray-300 px-6 py-3 font-bold text-gray-700">Teste</th>
+                            <th class="border border-gray-300 px-6 py-3 font-bold text-gray-700">Resultado</th>
+                            <th class="border border-gray-300 px-6 py-3 font-bold text-gray-700">Interpretação</th>
+                            <th class="border border-gray-300 px-6 py-3 font-bold text-gray-700">Prioridade</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-sm">
+                        <tr class="bg-red-50 hover:bg-red-100">
+                            <td class="border border-gray-300 px-6 py-3 font-bold text-gray-800">CT02</td>
+                            <td class="border border-gray-300 px-6 py-3 text-gray-800">Nome vazio rejeitado</td>
+                            <td class="border border-gray-300 px-6 py-3 font-bold text-red-600">FAIL &middot; HTTP 302</td>
+                            <td class="border border-gray-300 px-6 py-3 text-gray-600">O sistema aceitou/encaminhou a requisição em vez de retornar a rejeição esperada.</td>
+                            <td class="border border-gray-300 px-6 py-3 font-bold text-red-600">Alta</td>
+                        </tr>
+                        <tr class="bg-red-50 hover:bg-red-100">
+                            <td class="border border-gray-300 px-6 py-3 font-bold text-gray-800">CT03</td>
+                            <td class="border border-gray-300 px-6 py-3 text-gray-800">Preço obrigatório/inválido rejeitado</td>
+                            <td class="border border-gray-300 px-6 py-3 font-bold text-red-600">FAIL &middot; HTTP 302</td>
+                            <td class="border border-gray-300 px-6 py-3 text-gray-600">Validação do campo de preço não produziu a resposta de erro esperada.</td>
+                            <td class="border border-gray-300 px-6 py-3 font-bold text-red-600">Alta</td>
+                        </tr>
+                        <tr class="bg-red-50 hover:bg-red-100">
+                            <td class="border border-gray-300 px-6 py-3 font-bold text-gray-800">CT04</td>
+                            <td class="border border-gray-300 px-6 py-3 text-gray-800">Estoque obrigatório/inválido rejeitado</td>
+                            <td class="border border-gray-300 px-6 py-3 font-bold text-red-600">FAIL &middot; HTTP 302</td>
+                            <td class="border border-gray-300 px-6 py-3 text-gray-600">Validação do estoque não produziu a resposta de erro esperada.</td>
+                            <td class="border border-gray-300 px-6 py-3 font-bold text-red-600">Alta</td>
+                        </tr>
+                        <tr class="bg-red-50 hover:bg-red-100">
+                            <td class="border border-gray-300 px-6 py-3 font-bold text-gray-800">CT11</td>
+                            <td class="border border-gray-300 px-6 py-3 text-gray-800">Formato de arquivo inválido rejeitado</td>
+                            <td class="border border-gray-300 px-6 py-3 font-bold text-red-600">FAIL &middot; HTTP 302</td>
+                            <td class="border border-gray-300 px-6 py-3 text-gray-600">O tipo de arquivo inválido não foi bloqueado como o teste esperava.</td>
+                            <td class="border border-gray-300 px-6 py-3 font-bold text-red-600">Alta</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Riscos e Cobertura -->
+        <section class="w-full mb-12">
+            <h2 class="text-lg font-bold mb-4">Cobertura das funcionalidades críticas</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="border border-gray-300 p-5 rounded">
+                    <strong class="block text-sm mb-2 text-black">Cadastro e banco de dados</strong>
+                    <span class="block text-sm text-gray-500">Fluxo principal aprovado: cadastro válido, gravação no SQLite e persistência após reinício.</span>
+                </div>
+                <div class="border border-gray-300 p-5 rounded">
+                    <strong class="block text-sm mb-2 text-black">Imagens</strong>
+                    <span class="block text-sm text-gray-500">3 imagens, existência em disco, limite de 4 imagens e tamanho superior a 5 MB foram testados com sucesso.</span>
+                </div>
+                <div class="border border-gray-300 p-5 rounded">
+                    <strong class="block text-sm mb-2 text-black">Edição e exclusão</strong>
+                    <span class="block text-sm text-gray-500">Edição, substituição de imagem, exclusão e validação de produto inexistente foram aprovadas.</span>
+                </div>
+                <div class="border border-gray-300 p-5 rounded">
+                    <strong class="block text-sm mb-2 text-red-600">Validações de entrada</strong>
+                    <span class="block text-sm text-gray-500">É o principal ponto de atenção: nome, preço, estoque e formato inválido apresentaram falhas.</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Conclusão -->
+        <section class="w-full mb-6 border-t border-gray-200 pt-8">
+            <h2 class="text-lg font-bold mb-3">Conclusão automática</h2>
+            <p class="text-gray-700 leading-relaxed text-sm">
+                A suíte automatizada executou 28 testes, com 24 aprovados e 4 falhos. O núcleo operacional da aplicação — inicialização, resposta HTTP, interface, cadastro válido, SQLite, imagens, edição, consulta, exclusão e persistência — apresentou resultados positivos. As falhas estão concentradas em validações de entrada e upload de formato inválido. O índice de 85,7% indica que a aplicação ainda precisa de correções antes de ser considerada totalmente aprovada.
+            </p>
+        </section>
+
+        <div class="w-full text-center text-xs text-gray-400 mt-6">
+            Fonte: qa-report.html &middot; Última execução registrada: 24 PASS / 4 FAIL &middot; 3.958 ms
+        </div>
+    </main>
+
+    <!-- Script de Título -->
+    <script>
+        const qaRun = { total: 28, passed: 24, failed: 4, durationMs: 3958 };
+        document.title = `Dashboard QA — ${qaRun.passed}/${qaRun.total} aprovados`;
+    </script>
+
+    <!-- Rodapé (Footer) padrão -->
+    <footer class="w-full border-t border-black mt-16 py-12 px-8 lg:px-32 flex flex-col md:flex-row justify-between">
+        <div class="flex flex-col items-center md:items-start mb-10 md:mb-0 md:mr-16 md:w-1/3">
+            <div class="text-2xl font-medium mb-10">Loja</div>
+            <div class="flex space-x-6 text-gray-400 text-lg">
+                <a href="#" class="hover:text-black transition"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#" class="hover:text-black transition"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="#" class="hover:text-black transition"><i class="fa-brands fa-youtube"></i></a>
+                <a href="#" class="hover:text-black transition"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+        </div>
+        <div class="flex space-x-24 md:w-1/2 justify-center md:justify-start">
+            <div class="flex flex-col space-y-4">
+                <h4 class="font-bold text-sm mb-2">Tópico</h4>
+                <a href="#" class="text-gray-500 text-sm hover:text-black">Página</a>
+                <a href="#" class="text-gray-500 text-sm hover:text-black">Página</a>
+            </div>
+            <div class="flex flex-col space-y-4">
+                <h4 class="font-bold text-sm mb-2">Tópico</h4>
+                <a href="#" class="text-gray-500 text-sm hover:text-black">Página</a>
+                <a href="#" class="text-gray-500 text-sm hover:text-black">Página</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

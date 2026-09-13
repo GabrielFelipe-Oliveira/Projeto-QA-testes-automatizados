@@ -1,0 +1,17 @@
+{
+  "name": "loja-confeccao",
+  "version": "1.0.0",
+  "description": "Aplicacao de loja de confeccao com Node.js, SQLite, HTML, CSS e JavaScript",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "test:qa": "node qa/run-tests.js"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "multer": "^2.0.2",
+    "better-sqlite3": "^12.2.0",
+    "ejs": "^3.1.10"
+  }
+}

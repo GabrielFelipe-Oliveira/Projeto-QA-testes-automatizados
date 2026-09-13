@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Decisão de Implementação - Loja de Confecção</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f6f8;
+    color: #1f2937;
+  }
+  .container {
+    max-width: 1050px;
+    margin: 35px auto;
+    padding: 0 20px 40px;
+  }
+  .header {
+    background: #111827;
+    color: white;
+    border-radius: 16px;
+    padding: 28px;
+    margin-bottom: 20px;
+  }
+  .header h1 { margin: 0 0 8px; font-size: 30px; }
+  .header p { margin: 0; opacity: .85; }
+  .decision {
+    background: #fff7ed;
+    border: 2px solid #f59e0b;
+    border-radius: 16px;
+    padding: 26px;
+    margin-bottom: 20px;
+  }
+  .decision .status {
+    font-size: 34px;
+    font-weight: 800;
+    color: #b45309;
+    margin-bottom: 8px;
+  }
+  .decision p { margin: 8px 0; line-height: 1.55; }
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+  .card {
+    background: white;
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,.06);
+  }
+  .card .label { color: #6b7280; font-size: 14px; }
+  .card .value { font-size: 30px; font-weight: 800; margin-top: 7px; }
+  .success { color: #15803d; }
+  .danger { color: #b91c1c; }
+  .neutral { color: #374151; }
+  .section {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,.05);
+  }
+  .section h2 { margin-top: 0; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 12px;
+  }
+  th, td {
+    text-align: left;
+    padding: 12px;
+    border-bottom: 1px solid #e5e7eb;
+    vertical-align: top;
+  }
+  th { background: #f9fafb; }
+  .tag {
+    display: inline-block;
+    padding: 5px 9px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .tag.fail { background: #fee2e2; color: #991b1b; }
+  .tag.pass { background: #dcfce7; color: #166534; }
+  .action {
+    background: #eff6ff;
+    border-left: 5px solid #2563eb;
+    padding: 16px;
+    border-radius: 8px;
+    margin: 10px 0;
+  }
+  .final {
+    background: #ecfdf5;
+    border: 2px solid #10b981;
+    border-radius: 16px;
+    padding: 22px;
+  }
+  .final h2 { color: #047857; margin-top: 0; }
+  .small { color:#6b7280; font-size:13px; }
+  @media (max-width: 800px) {
+    .cards { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 520px) {
+    .cards { grid-template-columns: 1fr; }
+    .header h1 { font-size: 24px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <h1>Decisão de Implementação — Loja de Confecção</h1>
+    <p>Análise automática baseada no relatório de testes QA executado.</p>
+  </div>
+
+  <div class="decision">
+    <div class="status">NÃO IMPLEMENTAR AINDA</div>
+    <p><strong>Decisão recomendada:</strong> corrigir as falhas encontradas e executar a suíte de testes novamente antes de colocar o sistema em produção.</p>
+    <p>O sistema apresentou boa estabilidade nas funções principais, porém existem falhas em validações de entrada que permitem o envio de dados inválidos e arquivos em formato não permitido.</p>
+  </div>
+
+  <div class="cards">
+    <div class="card">
+      <div class="label">Testes executados</div>
+      <div class="value neutral">28</div>
+    </div>
+    <div class="card">
+      <div class="label">Aprovados</div>
+      <div class="value success">24</div>
+    </div>
+    <div class="card">
+      <div class="label">Falhos</div>
+      <div class="value danger">4</div>
+    </div>
+    <div class="card">
+      <div class="label">Taxa de aprovação</div>
+      <div class="value">85,7%</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>1. Resultado geral</h2>
+    <p>Foram aprovados <strong>24 de 28 testes</strong>, enquanto <strong>4 testes falharam</strong>. O tempo registrado para a execução foi de aproximadamente <strong>3,96 segundos</strong>.</p>
+    <p>As funcionalidades de inicialização, página principal, cadastro válido, SQLite, três imagens, edição, exclusão, busca, tratamento de produto inexistente e persistência foram aprovadas.</p>
+  </div>
+
+  <div class="section">
+    <h2>2. Falhas encontradas</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Teste</th>
+          <th>Resultado</th>
+          <th>Problema identificado</th>
+          <th>Impacto</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>CT02 — Nome vazio rejeitado</td>
+          <td><span class="tag fail">FALHA</span></td>
+          <td>Retornou HTTP 302 em vez de rejeitar a entrada.</td>
+          <td>Produto pode ser enviado sem nome válido.</td>
+        </tr>
+        <tr>
+          <td>CT03 — Preço obrigatório/inválido</td>
+          <td><span class="tag fail">FALHA</span></td>
+          <td>Retornou HTTP 302 em vez de rejeitar a entrada.</td>
+          <td>Dados de preço podem chegar ao fluxo sem validação esperada.</td>
+        </tr>
+        <tr>
+          <td>CT04 — Estoque obrigatório/inválido</td>
+          <td><span class="tag fail">FALHA</span></td>
+          <td>Retornou HTTP 302 em vez de rejeitar a entrada.</td>
+          <td>Estoque inválido ou ausente pode ser aceito.</td>
+        </tr>
+        <tr>
+          <td>CT11 — Formato de arquivo inválido</td>
+          <td><span class="tag fail">FALHA</span></td>
+          <td>Retornou HTTP 302 em vez de rejeitar arquivo inválido.</td>
+          <td>O upload pode aceitar um formato que deveria ser bloqueado.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>3. Pontos positivos para a implementação</h2>
+    <div class="action"><strong>Servidor:</strong> inicia automaticamente e a página principal responde corretamente.</div>
+    <div class="action"><strong>Banco de dados:</strong> cadastro, atualização, exclusão e persistência no SQLite foram aprovados.</div>
+    <div class="action"><strong>Imagens:</strong> três imagens são gravadas corretamente e os arquivos existem no disco.</div>
+    <div class="action"><strong>Regras de limite:</strong> quarta imagem e arquivo acima de 5 MB foram rejeitados.</div>
+    <div class="action"><strong>Operações principais:</strong> edição, consulta, busca e exclusão funcionaram nos testes.</div>
+  </div>
+
+  <div class="section">
+    <h2>4. O que deve ser corrigido antes da implementação</h2>
+    <ol>
+      <li>Fazer o backend rejeitar explicitamente nome vazio ou inválido.</li>
+      <li>Garantir validação de preço obrigatório e inválido no backend.</li>
+      <li>Garantir validação de estoque obrigatório e inválido no backend.</li>
+      <li>Validar o tipo/formato do arquivo de imagem no backend e retornar erro para formatos não permitidos.</li>
+      <li>Executar novamente todos os 28 testes após as correções.</li>
+    </ol>
+  </div>
+
+  <div class="final">
+    <h2>5. Critério para liberar a implementação</h2>
+    <p><strong>Recomenda-se implementar somente depois que os 4 testes falhos forem corrigidos e a nova execução confirmar a aprovação desses cenários.</strong></p>
+    <p>O sistema já demonstra que as funções centrais estão funcionando, portanto a situação não é de descarte do projeto. A decisão é de <strong>adiar a implementação</strong> até a correção das validações identificadas.</p>
+  </div>
+
+  <div class="section">
+    <h2>6. Resumo executivo</h2>
+    <table>
+      <tr><th>Indicador</th><th>Resultado</th></tr>
+      <tr><td>Status atual</td><td><span class="tag fail">NÃO IMPLEMENTAR AINDA</span></td></tr>
+      <tr><td>Testes aprovados</td><td>24</td></tr>
+      <tr><td>Testes falhos</td><td>4</td></tr>
+      <tr><td>Taxa de aprovação</td><td>85,7%</td></tr>
+      <tr><td>Próxima etapa</td><td>Corrigir as 4 falhas e executar a automação novamente.</td></tr>
+    </table>
+    <p class="small">Base: qa-report.html da Loja de Confecção.</p>
+  </div>
+
+</div>
+</body>
+</html>

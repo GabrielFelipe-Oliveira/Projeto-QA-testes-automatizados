@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loja - <%= titulo %></title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="min-h-screen flex flex-col font-sans text-black bg-white">
+
+    <!-- Cabeçalho (Header) mantido igual ao dashboard -->
+    <%- include('header') %>
+
+    <!-- Conteúdo Principal -->
+    <main class="flex-grow flex flex-col items-center py-12 px-6 w-full max-w-[800px] mx-auto">
+        
+        <h1 class="text-3xl font-bold mb-10 text-center w-full border-b border-gray-200 pb-4"><%= titulo %></h1>
+
+        <!-- Formulário (Enctype multipart/form-data é obrigatório para enviar imagens) -->
+        <!-- A variável 'acao' vem do server.js e diz se vai ser POST para /produtos ou /produtos/:id -->
+        <form action="<%= acao %>" method="POST" enctype="multipart/form-data" class="w-full space-y-6">
+            
+            <!-- Linha 1: Nome (Obrigatório) -->
+            <div>
+                <label for="nome" class="block text-sm font-bold mb-2">Nome do Produto *</label>
+                <!-- O código < %= produto ? produto.nome : '' % > verifica se está editando. Se sim, preenche. Se não, fica em branco -->
+                <input type="text" id="nome" name="nome" value="<%= produto ? produto.nome : '' %>" required
+                    class="w-full border border-black rounded px-4 py-3 outline-none focus:ring-1 focus:ring-black">
+            </div>
+
+            <!-- Linha 2: Preço e Estoque -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label for="preco" class="block text-sm font-bold mb-2">Preço (R$) *</label>
+                    <input type="number" id="preco" name="preco" step="0.01" min="0" value="<%= produto ? produto.preco : '' %>" required
+                        class="w-full border border-black rounded px-4 py-3 outline-none focus:ring-1 focus:ring-black">
+                </div>
+                <div>
+                    <label for="estoque" class="block text-sm font-bold mb-2">Quantidade em Estoque *</label>
+                    <input type="number" id="estoque" name="estoque" min="0" value="<%= produto ? produto.estoque : '' %>" required
+                        class="w-full border border-black rounded px-4 py-3 outline-none focus:ring-1 focus:ring-black">
+                </div>
+            </div>
+
+            <!-- Linha 3: Categoria, Tamanho e Cor -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div>
+                    <label for="categoria" class="block text-sm font-bold mb-2">Categoria</label>
+                    <input type="text" id="categoria" name="categoria" value="<%= produto ? produto.categoria : '' %>"
+                        class="w-full border border-black rounded px-4 py-3 outline-none focus:ring-1 focus:ring-black">
+                </div>
+                <div>
+                    <label for="tamanho" class="block text-sm font-bold mb-2">Tamanho</label>
+                    <input type="text" id="tamanho" name="tamanho" value="<%= produto ? produto.tamanho : '' %>"
+                        class="w-full border border-black rounded px-4 py-3 outline-none focus:ring-1 focus:ring-black">
+                </div>
+                <div>
+                    <label for="cor" class="block text-sm font-bold mb-2">Cor</label>
+                    <input type="text" id="cor" name="cor" value="<%= produto ? produto.cor : '' %>"
+                        class="w-full border border-black rounded px-4 py-3 outline-none focus:ring-1 focus:ring-black">
+                </div>
+            </div>
+
+            <!-- Linha 4: Descrição -->
+            <div>
+                <label for="descricao" class="block text-sm font-bold mb-2">Descrição</label>
+                <textarea id="descricao" name="descricao" rows="4" 
+                    class="w-full border border-black rounded px-4 py-3 outline-none focus:ring-1 focus:ring-black"><%= produto ? produto.descricao : '' %></textarea>
+            </div>
+
+            <!-- Linha 5: Imagens (Max 3 conforme seu server.js) -->
+            <div class="border border-black p-6 rounded bg-gray-50">
+                <label class="block text-sm font-bold mb-2">Imagens do Produto (Máx 3 arquivos, até 5MB cada)</label>
+                <p class="text-xs text-gray-500 mb-4">Formatos permitidos: JPG, PNG, WEBP.</p>
+                <input type="file" id="imagens" name="imagens" multiple accept=".jpg,.jpeg,.png,.webp"
+                    class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded file:border file:border-black file:text-sm file:font-semibold file:bg-white file:text-black hover:file:bg-gray-100 cursor-pointer">
+                
+                <!-- Mostra miniaturas se estiver editando e já tiver imagem -->
+                <% if (produto && (produto.imagem1 || produto.imagem2 || produto.imagem3)) { %>
+                    <div class="mt-4 border-t border-gray-300 pt-4">
+                        <p class="text-xs font-bold mb-2">Imagens Atuais:</p>
+                        <div class="flex space-x-4">
+                            <% [produto.imagem1, produto.imagem2, produto.imagem3].forEach(img => { %>
+                                <% if (img) { %>
+                                    <div class="w-20 h-20 border border-gray-300 rounded overflow-hidden">
+                                        <img src="/uploads/<%= img %>" class="object-cover w-full h-full" alt="Miniatura">
+                                    </div>
+                                <% } %>
+                            <% }) %>
+                        </div>
+                        <p class="text-[10px] text-gray-500 mt-2">* Ao fazer upload de novos arquivos, as imagens antigas serão substituídas.</p>
+                    </div>
+                <% } %>
+            </div>
+
+            <!-- Botões de Ação -->
+            <div class="pt-6 flex space-x-4">
+                <a href="/produtos" class="flex-1 text-center border border-black text-black py-4 rounded-full font-bold tracking-widest hover:bg-gray-100 transition">
+                    CANCELAR
+                </a>
+                <button type="submit" class="flex-1 bg-black text-white py-4 rounded-full font-bold tracking-widest hover:bg-gray-800 transition">
+                    SALVAR PRODUTO
+                </button>
+            </div>
+
+        </form>
+    </main>
+
+    <!-- Rodapé (Footer) mantido igual ao dashboard -->
+    <footer class="w-full border-t border-black mt-16 py-12 px-8 lg:px-32 flex flex-col md:flex-row justify-between">
+        <div class="flex flex-col items-center md:items-start mb-10 md:mb-0 md:mr-16 md:w-1/3">
+            <div class="text-2xl font-medium mb-10">Loja</div>
+            <div class="flex space-x-6 text-gray-400 text-lg">
+                <a href="#" class="hover:text-black transition"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#" class="hover:text-black transition"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="#" class="hover:text-black transition"><i class="fa-brands fa-youtube"></i></a>
+                <a href="#" class="hover:text-black transition"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+        </div>
+        <div class="flex space-x-24 md:w-1/2 justify-center md:justify-start">
+            <div class="flex flex-col space-y-4">
+                <h4 class="font-bold text-sm mb-2">Tópico</h4>
+                <a href="#" class="text-gray-500 text-sm hover:text-black">Página</a>
+                <a href="#" class="text-gray-500 text-sm hover:text-black">Página</a>
+            </div>
+            <div class="flex flex-col space-y-4">
+                <h4 class="font-bold text-sm mb-2">Tópico</h4>
+                <a href="#" class="text-gray-500 text-sm hover:text-black">Página</a>
+                <a href="#" class="text-gray-500 text-sm hover:text-black">Página</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

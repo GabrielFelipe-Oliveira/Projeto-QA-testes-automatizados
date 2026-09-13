@@ -1,0 +1,6 @@
+node_modules/
+loja.db
+loja.db-shm
+loja.db-wal
+qa-report.html
+qa-report.json
