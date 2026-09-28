@@ -10,7 +10,7 @@ Aplicação web simples para cadastro de produtos de uma loja de confecção.
 - SQLite via better-sqlite3
 - Multer para upload de imagens
 
-## Recursos
+## Recursos (CRUD e QA)
 - Cadastrar produto
 - Editar produto
 - Excluir produto
@@ -20,6 +20,11 @@ Aplicação web simples para cadastro de produtos de uma loja de confecção.
 - Até 3 imagens por produto
 - Imagens salvas em `/uploads`
 - Dados salvos em `loja.db`
+- Gestão de Catálogo (CRUD)
+- Qualidade e Automação de Testes (QA Dashboard)
+- Dashboard de Testes, painel administrativo integrado para visualização da saúde do sistema.
+- Execução Automatizada, capacidade de rodar testes de validação (ex: campos obrigatórios, bloqueio de formatos inválidos) diretamente pelo sistema.
+- Relatórios Detalhados, listagem completa de todos os testes executados, gerando uma documentação automática que indica o status individual de cada teste (Aprovado  / Falhou).
 
 ## Como executar
 1. Tenha Node.js instalado.
